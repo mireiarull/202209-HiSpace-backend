@@ -12,15 +12,15 @@ const corsOptions: CorsOptions = {
   origin: "*",
   optionsSuccessStatus: 200,
 };
-app.use(cors(corsOptions));
+
 app.disable("x-powered-by");
 
 app.use(morgan("dev"));
 
 app.use(express.json());
 
-app.use("/users", userRouter);
-app.use("/robots", robotsRouter);
+app.use("/users", cors(corsOptions), userRouter);
+app.use("/robots", cors(corsOptions), robotsRouter);
 
 app.use(notFoundError);
 app.use(generalError);
