@@ -2,11 +2,7 @@ import "../../loadEnvirontment.js";
 import type { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import type {
-  Credentials,
-  RegisterData,
-  UserTokenPayload,
-} from "../../types.js";
+import type { Credentials, RegisterData } from "../../types.js";
 import User from "../../database/models/User.js";
 import CustomError from "../../CustomError/CustomError.js";
 import environment from "../../loadEnvirontment.js";
@@ -41,12 +37,9 @@ export const loginUser = async (
     return;
   }
 
-  const tokenPaylod: UserTokenPayload = {
-    id: user._id.toString(),
-    username,
-  };
-
-  const token = jwt.sign(tokenPaylod, environment.jwtSecret);
+  const token = jwt.sign({ username, id: user._id }, environment.jwtSecret, {
+    expiresIn: "2d",
+  });
 
   res.status(200).json({ accessToken: token });
 };
