@@ -1,7 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import { generalError, notFoundError } from "./middlewares/error.js";
-import robotsRouter from "./routers/robotsRouters.js";
+import robotsRouter from "./routers/robotsRouter.js";
 import cors from "cors";
 import userRouter from "./routers/usersRouter.js";
 
