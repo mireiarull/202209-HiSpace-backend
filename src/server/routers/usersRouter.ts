@@ -5,6 +5,6 @@ import loginUser from "../controllers/userControllers.js";
 // eslint-disable-next-line new-cap
 const userRouter = express.Router();
 
-userRouter.get("/login", loginUser);
+userRouter.post("/login", loginUser);
 
 export default userRouter;
