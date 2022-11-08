@@ -2,18 +2,12 @@ import type { NextFunction, Request, Response } from "express";
 import User from "../../database/models/User";
 import type { Credentials } from "../../types";
 import { loginUser } from "./userControllers";
-import jwt from "jsonwebtoken";
-import environment from "../../loadEnvirontment";
 import CustomError from "../../CustomError/CustomError";
 import bcrypt from "bcryptjs";
 
 beforeEach(() => {
   jest.clearAllMocks();
 });
-
-const { jwtSecret } = environment;
-
-const token = jwt.sign({}, jwtSecret);
 
 const res: Partial<Response> = {
   status: jest.fn().mockReturnThis(),
@@ -69,7 +63,6 @@ describe("Given a loginUser controller", () => {
       const expectedStatus = 200;
       User.findOne = jest.fn().mockResolvedValueOnce(loginBody);
       bcrypt.compare = jest.fn().mockResolvedValueOnce(true);
-      jwt.sign = jest.fn().mockReturnValueOnce(token);
 
       await loginUser(req as Request, res as Response, next as NextFunction);
 
