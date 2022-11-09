@@ -20,7 +20,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.use("/users", cors(corsOptions), userRouter);
-app.use("/robots", cors(corsOptions), robotsRouter);
+app.use("/robots", robotsRouter);
 
 app.use(notFoundError);
 app.use(generalError);
