@@ -1,4 +1,5 @@
 import express from "express";
+import type { CorsOptions } from "cors";
 import morgan from "morgan";
 import { generalError, notFoundError } from "./middlewares/error.js";
 import robotsRouter from "./routers/robotsRouter.js";
@@ -7,12 +8,11 @@ import userRouter from "./routers/usersRouter.js";
 
 const app = express();
 
-// Const corsOptions: CorsOptions = {
-//   origin: "*",
-//   optionsSuccessStatus: 200,
-// };
-
-app.use(cors());
+const corsOptions: CorsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 app.disable("x-powered-by");
 
